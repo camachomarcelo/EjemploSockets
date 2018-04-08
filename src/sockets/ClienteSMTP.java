@@ -36,6 +36,26 @@ public class ClienteSMTP {
             salida.writeBytes(comando);
             System.out.println("S : " +entrada.readLine());
             
+            comando="MAIL FROM : "+user_emisor+" \r\n";
+                System.out.print("C : "+comando);
+                salida.writeBytes( comando );                
+                System.out.println("S : "+entrada.readLine());                
+
+            comando="RCPT TO : "+user_receptor+" \r\n";
+                System.out.print("C : "+comando);
+                salida.writeBytes( comando );                
+                System.out.println("S : "+entrada.readLine());
+                
+            comando="DATA\n";
+                System.out.print("C : "+comando);
+                salida.writeBytes( comando );                
+                System.out.println("S : "+getMultiline(entrada));
+                
+            comando="Subject:DEMO X\r\n"+"Probando\n"+"el envio de mensajes\n"+".\r\n";
+                System.out.print("C : "+comando);
+                salida.writeBytes( comando );                
+                System.out.println("S : "+entrada.readLine());
+            
             comando = "QUIT\r\n";
             System.out.print("C : " +comando);
             salida.writeBytes(comando);
@@ -51,5 +71,26 @@ public class ClienteSMTP {
         }catch (IOException e){ 
                  e.printStackTrace();
                  }       
+    }
+    
+    //Permite Leer multiples lineas del Protocolo SMTP
+
+   static protected String getMultiline(BufferedReader in) throws IOException{
+        String lines = "";
+        while (true){
+            String line = in.readLine();
+            if (line == null){
+               // Server closed connection
+               throw new IOException(" S : Server unawares closed the connection.");
+            }
+            if (line.charAt(3)==' '){
+                lines=lines+"\n"+line;
+                // No more lines in the server response
+                break;
+            }            
+            // Add read line to the list of lines
+            lines=lines+"\n"+line;
+        }        
+        return lines;
     }
 }
