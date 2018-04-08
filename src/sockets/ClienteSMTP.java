@@ -61,6 +61,7 @@ public class ClienteSMTP {
             salida.writeBytes(comando);
             System.out.println("S : " +entrada.readLine());
         }
+        
         salida.close();
         entrada.close();
         socket.close();
