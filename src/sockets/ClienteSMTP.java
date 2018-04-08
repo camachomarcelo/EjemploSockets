@@ -36,22 +36,22 @@ public class ClienteSMTP {
             salida.writeBytes(comando);
             System.out.println("S : " +entrada.readLine());
             
-            comando="MAIL FROM : "+user_emisor+" \r\n";
+            comando = "MAIL FROM : "+user_emisor+" \r\n";
                 System.out.print("C : "+comando);
                 salida.writeBytes( comando );                
                 System.out.println("S : "+entrada.readLine());                
 
-            comando="RCPT TO : "+user_receptor+" \r\n";
+            comando = "RCPT TO : "+user_receptor+" \r\n";
                 System.out.print("C : "+comando);
                 salida.writeBytes( comando );                
                 System.out.println("S : "+entrada.readLine());
                 
-            comando="DATA\n";
+            comando = "DATA\n";
                 System.out.print("C : "+comando);
                 salida.writeBytes( comando );                
                 System.out.println("S : "+getMultiline(entrada));
                 
-            comando="Subject:DEMO X\r\n"+"Probando\n"+"el envio de mensajes\n"+".\r\n";
+            comando = "Subject:DEMO X\r\n"+"Probando\n"+"el envio de mensajes\n"+".\r\n";
                 System.out.print("C : "+comando);
                 salida.writeBytes( comando );                
                 System.out.println("S : "+entrada.readLine());
